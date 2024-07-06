@@ -19,20 +19,10 @@ const productSchema = new Schema<Product>({
   tags: { type: [String], required: true },
   variants: { type: [VariantSchema], required: true },
   inventory: { type: InventorySchema, required: true },
-  isDeleted: { type: Boolean, default: false},
+  
 });
 
 
-// middleware for deleted data
-productSchema.pre("find", function(next){
-  this.find({isDeleted: {$ne: true}});
-  next();
-})
-
-productSchema.pre("findOne", function(next){
-  this.find({isDeleted: {$ne: true}});
-  next();
-})
 
 
 
