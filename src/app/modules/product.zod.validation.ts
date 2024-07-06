@@ -18,6 +18,7 @@ export const productValidationSchema = z.object({
     tags: z.array(z.string().nonempty("Tages is required")),
     variants: z.array(VariantValidationSchema),
     inventory: InventoryValidationSchema,
+    isDeleted: z.boolean()
 });
 
 

@@ -10,7 +10,8 @@ const createProduct = async (req: Request, res: Response) => {
     const zodValidateProduct = productValidationSchema.parse(product);
 
     // will call service function to send this data
-    const result = await ProductServices.createProductIntoDB(zodValidateProduct);
+    const result =
+      await ProductServices.createProductIntoDB(zodValidateProduct);
 
     // send response
     res.status(200).json({
@@ -65,8 +66,28 @@ const getSingleProduct = async (req: Request, res: Response) => {
   }
 };
 
+const deleteSingleProduct = async (req: Request, res: Response) => {
+  try {
+    const productId = req.params.productId;
+    const result = await ProductServices.deleteAProductFromDB(productId);
+
+    res.status(200).json({
+      sucess: true,
+      message: 'Product deleted successfully!',
+      data: result,
+    });
+  } catch (err) {
+    res.status(404).json({
+      sucess: false,
+      message: 'Products could not deleted successfully!',
+      data: err,
+    });
+  }
+};
+
 export const ProductControllers = {
   createProduct,
   getAllProduct,
   getSingleProduct,
+  deleteSingleProduct,
 };
