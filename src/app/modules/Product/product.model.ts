@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import { Inventory, Product, Variants } from '../product.interface';
+import { Inventory, Product, Variants } from './product.interface';
 
 const VariantSchema = new Schema<Variants>({
   type: { type: String, required: true },
@@ -19,13 +19,6 @@ const productSchema = new Schema<Product>({
   tags: { type: [String], required: true },
   variants: { type: [VariantSchema], required: true },
   inventory: { type: InventorySchema, required: true },
-  
 });
 
-
-
-
-
-
-export const ProductModel = model<Product>("Product", productSchema)
-
+export const ProductModel = model<Product>('Product', productSchema);

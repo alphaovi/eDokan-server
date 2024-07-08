@@ -1,6 +1,7 @@
 import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
-import { ProductRoutes } from './app/modules/product.route';
+import { ProductRoutes } from './app/modules/Product/product.route';
+import { OrderRoutes } from './app/modules/Order/order.route';
 
 const app: Application = express();
 
@@ -10,9 +11,11 @@ const app: Application = express();
 app.use(express.json());
 app.use(cors());
 
-// application routes
-app.use("/api/products", ProductRoutes);
+// application routes for products
+app.use('/api/products', ProductRoutes);
 
+// application routes for orders
+app.use('/api/orders', OrderRoutes);
 
 const getAController = (req: Request, res: Response) => {
   res.send('Hello World!');

@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
-import { ProductServices } from '../product.service';
-import { productValidationSchema } from '../product.zod.validation';
+import { ProductServices } from './product.service';
+import { productValidationSchema } from './product.zod.validation';
 
 const createProduct = async (req: Request, res: Response) => {
   try {
-    const product = req.body.product;
+    const product = req.body;
 
     // data validation using zod
     const zodValidateProduct = productValidationSchema.parse(product);
@@ -30,6 +30,7 @@ const createProduct = async (req: Request, res: Response) => {
 
 const getAllProduct = async (req: Request, res: Response) => {
   try {
+    
     const result = await ProductServices.getAllProductFromDB();
 
     res.status(200).json({
@@ -110,13 +111,14 @@ const updateSingleProduct = async (req: Request, res: Response) => {
 
 const searchProduct = async (req: Request, res: Response) => {
   try {
-    const searchTerm = req.body.searchTerm;
-    console.log(searchTerm)
-    const result = await ProductServices.serachAProductInDB(searchTerm);
+    const searchTerm = req.params.searchTerm as string;
+
+    const result = await ProductServices.searchAProductInDB(searchTerm);
 
     res.status(200).json({
       success: true,
-      message: 'Found the product',
+      count: result.length,
+      message: "Products matching search term 'iphone' fetched successfully!",
       data: result,
     });
   } catch (err) {
@@ -127,6 +129,26 @@ const searchProduct = async (req: Request, res: Response) => {
     });
   }
 };
+// const searchProduct = async (req: Request, res: Response) => {
+//   try {
+//     const searchTerm = req.params.searchTerm as string;
+
+//     const result = await ProductServices.searchAProductInDB(searchTerm);
+
+//     res.status(200).json({
+//       success: true,
+//       count: result.length,
+//       message: "Products matching search term 'iphone' fetched successfully!",
+//       data: result,
+//     });
+//   } catch (err) {
+//     res.status(422).json({
+//       success: false,
+//       message: 'Products could not updated successfully!',
+//       data: err,
+//     });
+//   }
+// };
 
 export const ProductControllers = {
   createProduct,

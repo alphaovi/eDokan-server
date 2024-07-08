@@ -1,5 +1,5 @@
 import { Product } from './product.interface';
-import { ProductModel } from './Product/product.model';
+import { ProductModel } from './product.model';
 
 const createProductIntoDB = async (product: Product) => {
   const result = await ProductModel.create(product);
@@ -32,10 +32,18 @@ const updateSingleProduct = async (_id: string, product: Product) => {
   return result;
 };
 
-const serachAProductInDB =async (searchTerm: string) => {
-  const result=  await ProductModel.find({name: {$regex: searchTerm, options: "i"}});
-  return result
-}
+const searchAProductInDB = async (searchTerm: string) => {
+  const result = await ProductModel.find({$match: searchTerm});
+
+  return result;
+};
+// const searchAProductInDB = async (searchTerm: string) => {
+//   const result = await ProductModel.find({
+//     name: { $regex: searchTerm, $options: 'i' },
+//   });
+
+//   return result;
+// };
 
 export const ProductServices = {
   createProductIntoDB,
@@ -43,5 +51,5 @@ export const ProductServices = {
   getSingleProductFromDB,
   deleteAProductFromDB,
   updateSingleProduct,
-  serachAProductInDB
+  searchAProductInDB,
 };
