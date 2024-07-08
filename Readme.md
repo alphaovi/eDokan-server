@@ -16,7 +16,7 @@ _For Order API_
 
 1. Post any document use this API, and select post method: /api/orders
 2. Get all orders, use this API: /api/orders
-3. Get order using email use this API: /api/orders/email?email=level2@programming-hero.com
+3. Get order using email use this API: /api/orders/email?email=<!--email -->
 
 
 _For .env File_
