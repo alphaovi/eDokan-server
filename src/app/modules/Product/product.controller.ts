@@ -108,10 +108,31 @@ const updateSingleProduct = async (req: Request, res: Response) => {
   }
 };
 
+const searchProduct = async (req: Request, res: Response) => {
+  try {
+    const searchTerm = req.body.searchTerm;
+    console.log(searchTerm)
+    const result = await ProductServices.serachAProductInDB(searchTerm);
+
+    res.status(200).json({
+      success: true,
+      message: 'Found the product',
+      data: result,
+    });
+  } catch (err) {
+    res.status(422).json({
+      success: false,
+      message: 'Products could not updated successfully!',
+      data: err,
+    });
+  }
+};
+
 export const ProductControllers = {
   createProduct,
   getAllProduct,
   getSingleProduct,
   deleteSingleProduct,
   updateSingleProduct,
+  searchProduct,
 };
