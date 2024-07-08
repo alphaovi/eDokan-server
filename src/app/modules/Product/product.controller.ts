@@ -119,36 +119,18 @@ const searchProduct = async (req: Request, res: Response) => {
       success: true,
       count: result.length,
       message: "Products matching search term 'iphone' fetched successfully!",
+      message2: "message from search query",
       data: result,
     });
   } catch (err) {
     res.status(422).json({
       success: false,
       message: 'Products could not updated successfully!',
+      message2: "message from search query",
       data: err,
     });
   }
 };
-// const searchProduct = async (req: Request, res: Response) => {
-//   try {
-//     const searchTerm = req.params.searchTerm as string;
-
-//     const result = await ProductServices.searchAProductInDB(searchTerm);
-
-//     res.status(200).json({
-//       success: true,
-//       count: result.length,
-//       message: "Products matching search term 'iphone' fetched successfully!",
-//       data: result,
-//     });
-//   } catch (err) {
-//     res.status(422).json({
-//       success: false,
-//       message: 'Products could not updated successfully!',
-//       data: err,
-//     });
-//   }
-// };
 
 export const ProductControllers = {
   createProduct,
