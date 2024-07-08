@@ -111,7 +111,7 @@ const updateSingleProduct = async (req: Request, res: Response) => {
 
 const searchProduct = async (req: Request, res: Response) => {
   try {
-    const searchTerm = req.params.searchTerm as string;
+    const searchTerm = req.query.searchTerm as string;
 
     const result = await ProductServices.searchAProductInDB(searchTerm);
 

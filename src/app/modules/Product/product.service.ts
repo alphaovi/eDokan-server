@@ -33,7 +33,7 @@ const updateSingleProduct = async (_id: string, product: Product) => {
 };
 
 const searchAProductInDB = async (searchTerm: string) => {
-  const result = await ProductModel.find({$match: searchTerm});
+  const result = await ProductModel.find({ name: { $regex: searchTerm, $options: 'i' } });
 
   return result;
 };

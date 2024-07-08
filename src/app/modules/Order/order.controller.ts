@@ -45,9 +45,9 @@ const getOrders = async(req: Request, res: Response) => {
 
 const getOrdersByMail = async(req: Request, res: Response) => {
     try{
-        const email = req.params.email;
+        const email = req.query.email as string;
         const result = await OrderServices.getOrdersByEmail(email);
-        res.status(400).json({
+        res.status(200).json({
             success: true,
             message: "Orders fetched successfully for user email",
             data: {result},
