@@ -17,14 +17,23 @@ const getSingleProductFromDB = async (_id: string) => {
   return result;
 };
 
-const deleteAProductFromDB = async (_id:string) => {
-  const result = await ProductModel.deleteOne({_id});
+const deleteAProductFromDB = async (_id: string) => {
+  const result = await ProductModel.deleteOne({ _id });
   return result;
 };
 
-const updateSingleProduct = async(_id: string, updateProduct: object) => {
-  const result = await ProductModel.updateOne({_id}, {$set: updateProduct});
+const updateSingleProduct = async (_id: string, product: Product) => {
+  const result = await ProductModel.findByIdAndUpdate(
+    { _id },
+    { $set: product },
+    { new: true },
+  );
+
   return result;
+};
+
+const serachProduct = () => {
+  const result=  await ProductModel.find();
 }
 
 export const ProductServices = {
@@ -32,5 +41,6 @@ export const ProductServices = {
   getAllProductFromDB,
   getSingleProductFromDB,
   deleteAProductFromDB,
-  updateSingleProduct
+  updateSingleProduct,
+  serachProduct
 };

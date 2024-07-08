@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
 const VariantValidationSchema = z.object({
-  type: z.string().nonempty('Type is required'),
-  value: z.string().nonempty('Value is required'),
+  type: z.string(),
+  value: z.string(),
 });
 
 const InventoryValidationSchema = z.object({
@@ -11,11 +11,11 @@ const InventoryValidationSchema = z.object({
 });
 
 export const productValidationSchema = z.object({
-  name: z.string().nonempty('Name is requried'),
-  description: z.string().nonempty('Description is requried'),
+  name: z.string(),
+  description: z.string(),
   price: z.number(),
-  category: z.string().nonempty('Category is requried'),
-  tags: z.array(z.string().nonempty('Tages is required')),
+  category: z.string(),
+  tags: z.array(z.string()),
   variants: z.array(VariantValidationSchema),
   inventory: InventoryValidationSchema,
 });
