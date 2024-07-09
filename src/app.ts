@@ -17,11 +17,15 @@ app.use('/api/products', ProductRoutes);
 // application routes for orders
 app.use('/api/orders', OrderRoutes);
 
-const getAController = (req: Request, res: Response) => {
-  res.send('Hello World!');
-};
+// const getAController = (req: Request, res: Response) => {
+//   res.send('Hello eShop!');
+// };
 
-app.get('/', getAController);
+app.get('/', (req: Request, res: Response) => {
+  res.status(200).json({
+    message: 'Welcome to eShop Server',
+  });
+});
 
 console.log(process.cwd());
 

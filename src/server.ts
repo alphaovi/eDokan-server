@@ -8,7 +8,7 @@ async function main() {
 
     app.listen(config.port, () => {
       console.log(
-        `after solve the problem app listening on port ${config.port}`,
+        `eShop Project is running on port: ${config.port}`,
       );
     });
   } catch (err) {
